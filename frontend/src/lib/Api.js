@@ -72,8 +72,8 @@ function Api(bearer){
 
 		axios(request)
 		.then(response => {
-			if(!isObj(response) || !isObj(response.data) || response.data.status !== 'ok') reject(new NetworkInvalidException('Невалидный ответ от API2'))
-			else if(isStr(object) && object.length && (!isObj(response.data.data) || response.data.data.object !== object)) reject(new NetworkInvalidException('Невалидный ответ от API1'))
+			if(!isObj(response) || !isObj(response.data) || response.data.status !== 'ok') reject(new NetworkInvalidException('Невалидный ответ от API'))
+			else if(isStr(object) && object.length && (!isObj(response.data.data) || response.data.data.object !== object)) reject(new NetworkInvalidException('Невалидный ответ от API'))
 			else resolve(response.data.data)
 		})
 		.catch(err => {
