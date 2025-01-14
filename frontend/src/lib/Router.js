@@ -3,6 +3,7 @@ import Layout from '../lib/Layout'
 import IndexPage from '../pages/IndexPage'
 import EstimatePage from '../pages/EstimatePage'
 import ContactsPage from '../pages/ContactsPage'
+import ProfilePage from '../pages/ProfilePage'
 import AdminUsersPage from '../pages/AdminUsersPage'
 
 
@@ -18,6 +19,9 @@ function Router(){
 					</Route>
 					<Route path='contacts'>
 						<Route index element={<ContactsPage />} />
+					</Route>
+					<Route path='profile'>
+						<Route index element={<ProfilePage />} />
 					</Route>
 					<Route path='admin'>
 						<Route path='users' element={<AdminUsersPage />} />

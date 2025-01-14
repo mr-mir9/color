@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useUser } from './User'
-import { isObj, isStr, isNetInv, isNetInvFields } from '../helpers/IsType'
+import { isObj, isStr, isNum, isArr, isFile, isNetInv, isNetInvFields } from '../helpers/IsType'
 import { NetworkInvalidException, NetworkInvalidFieldsException } from '../helpers/Exceptions'
 import axios from 'axios'
 
@@ -53,7 +53,7 @@ function Api(bearer){
 
 	const Request = options => {
 		if(!isObj(options)) options = {}
-		let { method, url, data, headers, object, bearer } = options
+		let { method, url, data, headers, object, bearer, requestType=null } = options
 		if(!isObj(headers)) headers = {}
 
 		let resolve, reject
@@ -66,8 +66,18 @@ function Api(bearer){
 		const request = { method, baseURL, url, timeout:10000 }
 		if(isObj(headers)) request.headers = headers
 		if(isObj(data)){
-			if(method === 'GET') request.params = data
-			else request.data = data
+			if(method === 'GET' || method === 'DELETE') request.params = data
+			else if(requestType === 'multipart'){
+				const formData = new FormData()
+				for(const field in data){
+					const value = data[field]
+					if(isStr(value) || isNum(value) || isFile(value)) formData.append(field, value)
+					else if(isArr(value)){
+						for(const valueArr of value) formData.append(`${field}[]`, valueArr)
+					}else console.error(`IGNORED VALUE ${field} : ${value}`)
+				}
+				request.data = formData
+			}else request.data = data
 		}
 
 		axios(request)
@@ -92,7 +102,11 @@ function Api(bearer){
 		const result = {}
 
 		result.getSession = token => Request({ method:'GET', url:'/v1/session', data:{ token }, object:'session' })
-		result.login = (email, password) => Request({ method:'POST', url:'/v1/session', data:{ email, password }, object:'session' })
+		result.login = requestBody => Request({ method:'POST', url:'/v1/session', data:requestBody })
+		result.update = (firstName, lastName, patronymic, email) => Request({ method:'PUT', url:'/v1/account', bearer, data:{ first_name:firstName, last_name:lastName, patronymic, email }, object:'user' })
+		result.updatePassword = (nowPassword, newPassword) => Request({ method:'POST', url:'/v1/account/password', bearer, data:{ now_password:nowPassword, new_password:newPassword } })
+		result.set2FA = requestBody => Request({ method:'POST', requestType:'multipart', url:'/v1/account/2fa', bearer, data:requestBody })
+		result.off2FA = password => Request({ method:'DELETE', url:'/v1/account/2fa', bearer, data: { password } })
 
 		return result
 	}

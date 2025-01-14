@@ -22,6 +22,12 @@ function isNum(arg){
 function isPromise(arg){
 	return isObj(arg) && arg.constructor === Promise
 }
+function isTrue(arg){
+	return arg === true
+}
+function isFile(arg){
+	return isObj(arg) && arg.constructor === File
+}
 
 
 function isNetInv(arg){
@@ -40,6 +46,8 @@ export {
 	isStr,
 	isNum,
 	isPromise,
+	isTrue,
+	isFile,
 
 	isNetInv,
 	isNetInvFields

@@ -32,6 +32,7 @@ button, input, textarea{ outline:none; font-family:var(--font-main); letter-spac
 .m14{ font-size:14px; line-height:100%; font-weight:500 }
 
 .t18{ font-size:18px; line-height:100%; font-weight:400 }
+.t16{ font-size:16px; line-height:100%; font-weight:400 }
 .t14{ font-size:14px; line-height:100%; font-weight:400 }
 .t12{ font-size:12px; line-height:100%; font-weight:400 }
 
@@ -117,7 +118,7 @@ button, input, textarea{ outline:none; font-family:var(--font-main); letter-spac
 .select-label{ position:absolute; left:16px; top:14px; font-size:15px; color:var(--color-gray2); transition:font-size .3s, top .3s; cursor:pointer }
 .select-field.filled .select-label{ top:6px; font-size:12px }
 .select-field-arrow{ position:absolute; right:16px; top:50%; transform:translateY(-50%); fill:var(--color-gray3); cursor:pointer; width:20px; height:20px; transition:transform .3s }
-.select-modal{ position:absolute; left:0; right:0; top:calc(100% + 10px); background:#f3f3f7; border-radius:12px; box-shadow:0 0 10px rgba(0, 0, 0, .15); display:none }
+.select-modal{ position:absolute; left:0; right:0; top:calc(100% + 5px); background:#f3f3f7; border-radius:12px; box-shadow:0 0 10px rgba(0, 0, 0, .15); border:1px solid #cbcbcb; display:none }
 .select-modal .select-option{ height:46px; display:flex; align-items:center; padding:0 14px; font-size:14px; font-weight:400; color:var(--color-gray); z-index:2; cursor:pointer; transition:background .3s; position:relative }
 .select-modal .select-option:not(.selected):hover{ background:rgba(0,0,0,.1) }
 .select-modal .select-option:first-child{ border-top-left-radius:12px; border-top-right-radius:12px }
@@ -127,6 +128,18 @@ button, input, textarea{ outline:none; font-family:var(--font-main); letter-spac
 .select-modal .select-option > div{ max-width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 .select.show .select-field-arrow{ transform:translateY(-50%) rotate(180deg) }
 .select.show .select-modal{ display:block }
+
+
+
+
+.select-range{ width:100%; padding-bottom:18px }
+.select-range-line{ width:100%; height:4px; background:var(--color-gray5); border-radius:99px; position:relative }
+.select-range-bar{ position:absolute; left:0; top:0; bottom:0; border-radius:99px; background:var(--color-blue); width:0 }
+.select-range-dot{ position:absolute; z-index:2; top:2px; left:0; width:0; height:0 }
+.select-range-dot > div{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:99px; box-shadow:0 0 10px rgba(255, 255, 255, 0); background:var(--color-blue); cursor:pointer; transition:box-shadow .3s, background .3s }
+.select-range.hover .select-range-dot > div{ box-shadow:0 0 10px rgba(255, 255, 255, .5); background:var(--color-blue-hover) }
+.select-range-values{ position:absolute; left:0; right:0; top:calc(100% + 6px); display:flex; align-items:center; justify-content:space-between; font-size:10px; color:var(--color-gray3) }
+.select-range-label{ width:100%; display:flex; align-items:center; justify-content:space-between; padding-bottom:12px }
 
 
 
@@ -184,6 +197,8 @@ button, input, textarea{ outline:none; font-family:var(--font-main); letter-spac
 .form-btn{ padding-top:20px }
 .form-btn .btn{ width:100% }
 .form-error{ text-align:center; padding-top:30px }
+
+.form-field-w50{ width:50% }
 
 
 
@@ -283,6 +298,61 @@ button, input, textarea{ outline:none; font-family:var(--font-main); letter-spac
 .contacts-field{ display:flex; align-items:center; justify-content:space-between; margin-top:15px; padding-top:15px; border-top:1px dashed var(--color-gray4) }
 .contacts-field > div:first-child{ display:flex }
 .contacts-field svg{ width:20px; min-width:20px; height:20px; margin-right:8px; fill:var(--color-gray2) }
+
+
+
+/* PRORILE */
+.profile-section{ width:100%; flex-grow:1; background:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .033) 60px); padding:110px 0 60px }
+.profile-title{ width:100%; text-transform:uppercase; width:100%; padding-bottom:60px; text-align:center }
+.profile-containers{ width:100%; display:flex; justify-content:center; flex-wrap:wrap }
+.profile-container{ width:532px; padding:32px 16px 0; display:flex; flex-direction:column }
+.profile-container > div{ background:var(--color-white); border-radius:15px; padding:24px 24px 32px; box-shadow:0 0 20px rgba(0, 0, 0, .03); flex-grow:1; display:flex; flex-direction:column }
+.profile-container form:not(.profile-form){ flex-grow:1; display:flex; flex-direction:column; justify-content:center }
+.profile-form, .profile-password-form{ padding-top:24px }
+.profile-form .form-field:first-child{ padding-bottom:8px }
+.profile-form .form-field:first-child .t12{ margin-top:5px }
+.profile-form + div{ width:100%; padding-top:24px; display:flex; align-items:flex-end }
+.profile-form + div .btn{ width:100% }
+
+.profile-2fa-container{ width:1064px }
+.profile-2fa-container > div{ display:flex }
+.profile-2fa-title{ display:flex; align-items:center }
+.profile-2fa-title > div:first-child{ flex-grow:1 }
+.profile-2fa-body{ display:flex; flex-direction:column; justify-content:center; flex-grow:1 }
+.profile-2fa-body > div:nth-child(2){ margin-top:5px }
+.profile-2fa-body .t12 + .t16, .profile-2fa-body .t16 + .t16{ margin-top:24px }
+.profile-2fa-form-modal{ align-items:center }
+.profile-2fa-info-dots > div:nth-child(2){ margin-top:5px }
+.profile-2fa-section{ display:flex; align-items:flex-start; padding-top:24px }
+.profile-2fa-form-image{ padding-left:24px }
+.profile-2fa-form-image > div{ background:no-repeat center / contain; border-radius:12px; box-shadow:0 0 10px rgba(0, 0, 0, .15) }
+
+.profile-2fa-image-form-field{ padding-top:32px; padding-bottom:16px }
+.profile-2fa-image-field > input{ display:none }
+.profile-2fa-image-label{ border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; border:5px dashed var(--color-gray4); padding:32px 16px; cursor:pointer }
+.profile-2fa-image-label > div:first-child{ position:absolute; left:-4px; right:-4px; top:-4px; bottom:-4px; z-index:1; border-radius:12px; background:#fff }
+.profile-2fa-image-label > div:nth-child(2){ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center }
+.profile-2fa-image-label .btn{ margin-top:16px }
+
+.profile-2fa-image-preview-container{ width:100%; margin:0 auto; display:flex; flex-direction:column; align-items:center }
+.profile-2fa-image-preview-title{ padding-bottom:16px; text-align:center }
+.profile-2fa-image-preview{ background:no-repeat center / contain; border-radius:12px; box-shadow:0 0 10px rgba(0, 0, 0, .15); position:relative }
+.profile-2fa-image-preview-buttons{ display:flex; align-items:center; padding-top:16px }
+.profile-2fa-image-preview-buttons > div{ cursor:pointer }
+.profile-2fa-image-preview-buttons > div + div{ margin-left:16px }
+
+.profile-2fa-image-preview-dot{ position:absolute; width:0; height:0 }
+.profile-2fa-image-preview-dot-container{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) }
+.profile-2fa-image-preview-dot-container > div:first-child{ position:relative; z-index:2; text-shadow:0 0 8px rgba(255, 255, 255, .8); font-size:10px; color:#000; cursor:default }
+.profile-2fa-image-preview-dot-container > div:nth-child(2){ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); border-radius:50%; background:rgba(0, 122, 255, .75); border:1px solid rgba(255, 255, 255, .8) }
+
+.modal-2fa-image > div{ background:no-repeat center / contain; border-radius:12px; box-shadow:0 0 10px rgba(0, 0, 0, .15); position:relative }
+.modal-2fa-image-dot{ position:absolute; width:0; height:0 }
+.modal-2fa-image-dot > div{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) }
+.modal-2fa-image-dot > div > div:nth-child(1){ position:relative; z-index:2; font-size:10px; color:#000; text-shadow:0 0 8px rgba(255, 255, 255, .8) }
+.modal-2fa-image-dot > div > div:nth-child(2){ position:absolute; z-index:1; top:50%; left:50%; transform:translate(-50%,-50%); width:16px; height:16px; background:rgba(0, 122, 255, .75); border:1px solid rgba(255, 255, 255, .8); border-radius:50% }
+
+.modal-2fa-image-clear{ cursor:pointer; width:100%; text-align:center }
 
 
 

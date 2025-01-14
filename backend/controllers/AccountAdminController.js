@@ -104,7 +104,7 @@ exports.update = asyncHandler(async (req, res) => {
 		if(Object.keys(errors).length) throw new InvalidFieldsException(errors)
 
 		const { first_name:firstName, last_name:lastName, patronymic, role, email } = req.body
-		res.ok(await User.update(userId, firstName, lastName, patronymic, role, email))
+		res.ok(await User.updateAdmin(userId, firstName, lastName, patronymic, role, email))
 	}catch(e){
 		res.err(e)
 	}

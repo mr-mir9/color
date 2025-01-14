@@ -1,4 +1,5 @@
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 import { ReactComponent as EmailSvg } from '../icons/Email.svg'
 import { ReactComponent as TelegramSvg } from '../icons/Telegram.svg'
@@ -33,6 +34,7 @@ function ContactsPage(){
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</div>
 	)
 

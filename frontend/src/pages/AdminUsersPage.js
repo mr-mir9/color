@@ -6,6 +6,7 @@ import { useModal } from '../lib/Modal'
 import { isObj, ofArr } from '../helpers/IsType'
 import { numWord } from '../helpers/Helper'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import AlertModal from '../modals/AlertModal'
 import ConfirmModal from '../modals/ConfirmModal'
 import CreateUserModal from '../modals/CreateUserModal'
@@ -177,6 +178,7 @@ function AdminUsersPage(){
 					</div>
 				)}
 			</div>
+			<Footer />
 		</div>
 	)
 

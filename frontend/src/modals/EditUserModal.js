@@ -64,8 +64,8 @@ function EditUserModal({ callback, user }){
 				<CloseSvg onClick={closeHandler} />
 			</div>
 			<form className='form edit-user__form' onSubmit={submitHandler}>
-				<div className='form-field'><Field className='xl' label='Фамилия' value={lastName} setValue={setLastName} err={lastNameError} setErr={setLastNameError} setValid={setLastNameValid} validators={lastNameValidators} disabled={loading} /></div>
-				<div className='form-field'><Field className='xl' label='Имя' value={firstName} setValue={setFirstName} err={firstNameError} setErr={setFirstNameError} setValid={setFirstNameValid} validators={firstNameValidators} disabled={loading} /></div>
+				<div className='form-field'><Field className='xl' label='Фамилия *' value={lastName} setValue={setLastName} err={lastNameError} setErr={setLastNameError} setValid={setLastNameValid} validators={lastNameValidators} disabled={loading} /></div>
+				<div className='form-field'><Field className='xl' label='Имя *' value={firstName} setValue={setFirstName} err={firstNameError} setErr={setFirstNameError} setValid={setFirstNameValid} validators={firstNameValidators} disabled={loading} /></div>
 				<div className='form-field'><Field className='xl' label='Отчество' value={patronymic} setValue={setPatronymic} err={patronymicError} setErr={setPatronymicError} setValid={setPatronymicValid} disabled={loading} /></div>
 				<div className='form-field'>
 					<Select label='Роль пользователя' onChange={setRole}>
@@ -73,7 +73,7 @@ function EditUserModal({ callback, user }){
 						<Option value='user' selected={role==='user'}>{getRoleName('user')}</Option>
 					</Select>
 				</div>
-				<div className='form-field'><Field className='xl' label='Адрес электронной почты' value={email} setValue={setEmail} err={emailError} setErr={setEmailError} setValid={setEmailValid} validators={emailValidators} disabled={loading} /></div>
+				<div className='form-field'><Field className='xl' label='Адрес электронной почты *' value={email} setValue={setEmail} err={emailError} setErr={setEmailError} setValid={setEmailValid} validators={emailValidators} disabled={loading} /></div>
 				{isStr(error) && error.length ? <div className='t14 color-red form-error'>{error}</div> : null}
 				<div className='form-btn'><button type='submit' className='btn xl blue' disabled={disabled}>{loading ? 'Отправка...' : 'Сохранить'}</button></div>
 			</form>

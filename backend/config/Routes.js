@@ -1,4 +1,6 @@
 const express = require('express')
+const multer  = require('multer')
+const upload = multer({ dest: `${__dirname}/../uploads` })
 const router = express.Router()
 
 const bodyParser = require('body-parser')
@@ -8,8 +10,21 @@ router.use(bodyParser.json())
 
 
 
+const FilesController = require('../controllers/FilesController')
+router.get('/files/*', FilesController.get)
+
+
+
+
 const apiRouter = express.Router()
 
+
+// V1: Account
+const AccountController = require('../controllers/AccountController')
+apiRouter.put('/account', AccountController.update)
+apiRouter.post('/account/password', AccountController.updatePassword)
+apiRouter.post('/account/2fa', upload.single('image'), AccountController.set2FA)
+apiRouter.delete('/account/2fa', AccountController.remove2FA)
 
 // V1: Session
 const SessionController = require('../controllers/SessionController')

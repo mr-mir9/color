@@ -1,9 +1,11 @@
 import { useCallback, useState, useMemo, useEffect } from 'react'
 import { useApi, parseNetworkError } from '../lib/Api'
-import { isStr } from '../helpers/IsType'
+import { isStr, isObj } from '../helpers/IsType'
 import { useUser } from '../lib/User'
+import { useModal } from '../lib/Modal'
 import Field from '../helpers/Field'
 import Validators from '../helpers/Validators'
+import Auth2FAImageModal from '../modals/Auth2FAImageModal'
 
 import { ReactComponent as CloseSvg } from '../icons/Close.svg'
 
@@ -11,6 +13,7 @@ import { ReactComponent as CloseSvg } from '../icons/Close.svg'
 function AuthModal({ callback }){
 
 	const api = useApi()
+	const modal = useModal()
 	const { setToken, setUser } = useUser()
 
 
@@ -42,15 +45,21 @@ function AuthModal({ callback }){
 		setEmailError(null)
 		setPasswordError(null)
 
-		api.Account.login(email, password)
+		api.Account.login({ email, password })
 		.then(data => {
-			setToken(data.token)
-			setUser(data.user)
-			callback()
+			if(isObj(data) && data.object === 'action' && data.action === '2fa' && data['2fa'].type === 'image'){
+				console.log('666')
+				modal.show(<Auth2FAImageModal email={email} password={password} image={data['2fa'].image} />)
+			}
+			else if(isObj(data) && data.object === 'session'){
+				setToken(data.token)
+				setUser(data.user)
+				callback()
+			}else setError('Invalid response API')
 		})
 		.catch(e => parseNetworkError(e, { email:setEmailError, password:setPasswordError }, setError))
 		.finally(() => setLoading(false))
-	}, [api, email, password, setToken, setUser, callback])
+	}, [api, modal, email, password, setToken, setUser, callback])
 
 	const disabled = useMemo(() => loading || !emailValid || !passwordValid, [loading, emailValid, passwordValid])
 

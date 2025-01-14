@@ -33,6 +33,7 @@ function Navbar(){
 			<div className='navbar-links'>
 				<NavLink to='/' className={({ isActive }) => `navbar-link m16 ${isActive ? 'active' : ''}`}>Главная</NavLink>
 				<NavLink to='/contacts' className={({ isActive }) => `navbar-link m16 ${isActive ? 'active' : ''}`}>Контакты</NavLink>
+				{user ? <NavLink to='/profile' className={({ isActive }) => `navbar-link m16 ${isActive ? 'active' : ''}`}>Профиль</NavLink> : null}
 				{user && user.role === 'admin' ? <NavLink to='/admin/users' className={({ isActive }) => `navbar-link m16 ${isActive ? 'active' : ''}`}>Администрирование пользователей</NavLink> : null}
 			</div>
 			{user ? (

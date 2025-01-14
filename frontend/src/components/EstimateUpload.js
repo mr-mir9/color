@@ -23,7 +23,7 @@ function EstimateUpload({ setImage }){
 				const file = files[0]
 				input.value = ''
 				if(!['image/webp', 'image/png', 'image/jpeg', 'image/bmp'].includes(file.type)) throw new Error('Изображение должно быть JPG, JPEG, PNG, WEBP или BMP')
-				if(!isNum(file.size) || file.size > 10000000) throw new Error('максимальный размер файла 10 Мб')
+				if(!isNum(file.size) || file.size > 10000000) throw new Error('Максимальный размер файла 10 Мб')
 
 				if(isFunc(setImage)) setImage(file)
 			}catch(e){
